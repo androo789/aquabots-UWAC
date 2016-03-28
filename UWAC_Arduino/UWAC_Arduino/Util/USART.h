@@ -15,7 +15,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int receiveDone;
+
 void USART0Init(void);
 int USART0SendByte(char u8Data, FILE *stream);
+char USART0GetByte(FILE *stream);
 
 #endif /* USART_H_ */

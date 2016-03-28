@@ -38,7 +38,9 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../data_conversion.c \
 ../main.c \
+../Util/I2C.c \
 ../Util/USART.c
 
 
@@ -49,19 +51,27 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+data_conversion.o \
 main.o \
+Util/I2C.o \
 Util/USART.o
 
 OBJS_AS_ARGS +=  \
+data_conversion.o \
 main.o \
+Util/I2C.o \
 Util/USART.o
 
 C_DEPS +=  \
+data_conversion.d \
 main.d \
+Util/I2C.d \
 Util/USART.d
 
 C_DEPS_AS_ARGS +=  \
+data_conversion.d \
 main.d \
+Util/I2C.d \
 Util/USART.d
 
 OUTPUT_FILE_PATH +=UWAC_Arduino.elf
@@ -78,6 +88,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
