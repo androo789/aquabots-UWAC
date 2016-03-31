@@ -93,7 +93,7 @@ uint8_t* fillDataArray(char data[100])
 char* convertToData(uint8_t bits[400], int length)
 {
     // Reset some stuff and initialize some variables
-    int i;
+    uint16_t i;
     int total = 0;
     char ret[100] = ""; // The return value
     char tmp = 0b00000000; // Create a temp char with no data
@@ -110,17 +110,17 @@ char* convertToData(uint8_t bits[400], int length)
         printf("\ni:%i", i);
         #endif
 
-        tmp = tmp << 2 | bits[i]; // Add the bits to the right of the previous ones
+        tmp = tmp << 2 | (bits[i] & 0b11); // Add the bits to the right of the previous ones
 
         #ifdef DEBUG // Debugging
-        printf(" bits%i tmp%i,", bits[i], (uint8_t)tmp);
+        printf(" bits%i tmp%i,", (bits[i] & 0b11), (uint8_t)tmp);
         #endif
 
         // If this is dividable by 4
         if ((i + 1) % 4 == 0)
         {
             #ifdef DEBUG // Debugging
-            printf("\nchar %c\n", tmp);
+            printf("\nchar %c\nTotal %i\n", tmp, total);
             #endif // DEBUG
 
             ret[total] = tmp; // Store the temp value in the return value
@@ -181,7 +181,7 @@ int CRC(uint8_t data[100], int length, uint16_t poly, bool received)
 
     // Reset some stuff and initialize some variables
     int i;
-    int allData = 0;
+    uint16_t allData = 0;
 
     // Loop through all the bits
     for (i = 0; i < length; i++)
@@ -194,7 +194,7 @@ int CRC(uint8_t data[100], int length, uint16_t poly, bool received)
     }
 
     #ifdef DEBUG // Debugging
-    printf("\nallData: %i\n", allData);
+    printf("\nallData: %u\n", allData);
     #endif // DEBUG
 
     if (!received) // Check if the data is received or not

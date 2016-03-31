@@ -14,42 +14,36 @@
 #include "Util/I2C.h"
 #include "data_conversion.h"
 
-FILE usart0_output = FDEV_SETUP_STREAM(USART0SendByte, NULL, _FDEV_SETUP_WRITE);
-FILE usart0_input = FDEV_SETUP_STREAM(NULL, USART0GetByte, _FDEV_SETUP_READ);
-FILE usart0_io = FDEV_SETUP_STREAM(USART0SendByte, USART0GetByte, _FDEV_SETUP_RW);
+FILE usart0_output = FDEV_SETUP_STREAM(USART0SendByte, NULL, _FDEV_SETUP_WRITE);	// Output file for USART
+FILE usart0_input = FDEV_SETUP_STREAM(NULL, USART0GetByte, _FDEV_SETUP_READ);		// Input file for USART
 
 int main(void)
 {
+	/* USART INIT START */
 	USART0Init();
 	stdout =& usart0_output;
 	stdin =& usart0_input;
+	/* USART INIT STOP */
 
-	i2c_init();
+	i2c_init(); // Init I2C (TWI)
 
-	char tmp;
-	char input[100] = "test";
+	char input[55] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // MAX STRING LENGTH BEFORE UC DOES WIERD STUFF
 
-	int i = 0;
+	#ifdef DEBUG
+	printf("\n\n\n\nSTART CODE WITH THIS INPUT: %s\n\n", input); // Print the input string
+	#endif // DEBUG
 
-	/*printf("Scanning now.\n");
-	while (i < 4)
-	{
-		scanf("%c", &tmp);
-		input[i++] = tmp;
-		printf("%s\n", input);
-	}*/
+	int* dataToSend = fillDataArray(input); // Convert data to base4
+	char* received = convertToData(dataToSend, dataLength); // Convert base4 to data
 
-	int* dataToSend = fillDataArray(input);
-	char* received = convertToData(dataToSend, dataLength);
-
-	printf("\nReceived data: %s\n\n", received);
+	#ifdef DEBUG
+	printf("\nReceived data: %s\n\n", received); // Print the received data
 
 	printf("Entering loop now....\n");
+	#endif
+
     while (1) 
     {
-		//printf("Send debug data to PC\n");
-		/*scanf("%c", &input);
-		printf("You wrote: %c\n", input);*/
+		// Main loop
     }
 }
-
