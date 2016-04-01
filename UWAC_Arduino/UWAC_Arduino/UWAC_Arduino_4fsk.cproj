@@ -13,7 +13,7 @@
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>UWAC_Arduino</AssemblyName>
-    <Name>UWAC_Arduino</Name>
+    <Name>UWAC_Arduino_4fsk</Name>
     <RootNamespace>UWAC_Arduino</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>

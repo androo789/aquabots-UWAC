@@ -33,7 +33,7 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-../Util
+../Util/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -74,9 +74,9 @@ main.d \
 Util/I2C.d \
 Util/USART.d
 
-OUTPUT_FILE_PATH +=UWAC_Arduino_4fsk.elf
+OUTPUT_FILE_PATH +=UWAC_Arduino_2fsk.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=UWAC_Arduino_4fsk.elf
+OUTPUT_FILE_PATH_AS_ARGS +=UWAC_Arduino_2fsk.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -136,13 +136,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="UWAC_Arduino_4fsk.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega328p"  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="UWAC_Arduino_2fsk.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega328p"  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "UWAC_Arduino_4fsk.elf" "UWAC_Arduino_4fsk.hex"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "UWAC_Arduino_4fsk.elf" "UWAC_Arduino_4fsk.eep" || exit 0
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "UWAC_Arduino_4fsk.elf" > "UWAC_Arduino_4fsk.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "UWAC_Arduino_4fsk.elf" "UWAC_Arduino_4fsk.srec"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "UWAC_Arduino_4fsk.elf"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "UWAC_Arduino_2fsk.elf" "UWAC_Arduino_2fsk.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "UWAC_Arduino_2fsk.elf" "UWAC_Arduino_2fsk.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "UWAC_Arduino_2fsk.elf" > "UWAC_Arduino_2fsk.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "UWAC_Arduino_2fsk.elf" "UWAC_Arduino_2fsk.srec"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "UWAC_Arduino_2fsk.elf"
 	
 	
 
@@ -154,5 +154,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "UWAC_Arduino_4fsk.elf" "UWAC_Arduino_4fsk.a" "UWAC_Arduino_4fsk.hex" "UWAC_Arduino_4fsk.lss" "UWAC_Arduino_4fsk.eep" "UWAC_Arduino_4fsk.map" "UWAC_Arduino_4fsk.srec" "UWAC_Arduino_4fsk.usersignatures"
+	rm -rf "UWAC_Arduino_2fsk.elf" "UWAC_Arduino_2fsk.a" "UWAC_Arduino_2fsk.hex" "UWAC_Arduino_2fsk.lss" "UWAC_Arduino_2fsk.eep" "UWAC_Arduino_2fsk.map" "UWAC_Arduino_2fsk.srec" "UWAC_Arduino_2fsk.usersignatures"
 	
