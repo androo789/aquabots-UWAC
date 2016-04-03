@@ -12,7 +12,6 @@
 #include <util/delay.h>
 
 #include "Util/USART.h"
-#include "Util/I2C.h"
 #include "data_conversion.h"
 
 void sendData(int* dataToSend); // Test function to see if the data is put on the output pin (pin 13)
@@ -31,8 +30,6 @@ int main(void)
 	stdout =& usart0_output;
 	stdin =& usart0_input;
 	/* USART INIT STOP */
-
-	i2c_init(); // Init I2C (Two Wire Interface)
 
 	//char input[55] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // MAX STRING LENGTH BEFORE UC DOES WIERD STUFF
 	//char input[55] = "test";

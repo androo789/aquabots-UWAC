@@ -8,5 +8,7 @@ main.c
 
 Util\I2C.c
 
+Util\SPI.c
+
 Util\USART.c
 
