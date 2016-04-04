@@ -13,7 +13,7 @@
 
 #include "defines.h"
 
-void spiInit(void);
-unsigned char spiTransfer(unsigned char data);
+void SPIInit(void);
+void SPITransfer(unsigned char data);
 
 #endif /* SPI_H_ */

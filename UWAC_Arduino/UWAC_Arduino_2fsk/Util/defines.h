@@ -9,7 +9,9 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#define DEBUG
+#include <avr/io.h>
+
+//#define DEBUG
 
 #define F_CPU			16000000UL
 
@@ -24,8 +26,10 @@
 #define TWBR_val		((((F_CPU / F_SCL) / Prescaler) - 16) / 2)
 /* END I2C DEFINES */
 
-#define BAUDRATE		500
+#define OUTPUT_BAUDRATE	500		// Baudrate for the data
+#define OUTPUT_PIN		DDB0	// Pin that will select the profile
+#define INPUT_PIN		DDC0	// Pin that receives the bits
 
-#define POLY			0x167
+#define POLY			0x167	// Error checking poly
 
 #endif /* DEFINES_H_ */

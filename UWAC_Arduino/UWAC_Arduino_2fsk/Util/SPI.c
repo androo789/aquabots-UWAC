@@ -7,7 +7,7 @@
 
 #include "SPI.h"
 
-void spiInit()
+void SPIInit()
 {
 	// Set MOSI, SCK as output
 	DDRB |= (1 << DDB3) | (1 << DDB5);
@@ -16,7 +16,7 @@ void spiInit()
 	SPCR = (1 << SPE) | (1 << MSTR);
 }
 
-unsigned char spiTransfer(unsigned char data)
+void SPITransfer(unsigned char data)
 {
 	// Start transmission
 	SPDR = data;

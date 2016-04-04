@@ -27,6 +27,12 @@ uint8_t* fillDataArray(char data[100])
     uint8_t ret[800]; // The return variable
     uint8_t data_num[100]; // The int representation of the data
 
+	for (i = 0; i < 8; i++)
+	{
+		ret[dataLength] = 1;
+		dataLength++;
+	}
+
     // Convert the chars to ints
     for (i = 0; i < strlen(data); i++)
     {
@@ -51,7 +57,7 @@ uint8_t* fillDataArray(char data[100])
             uint8_t tmp = (ascii & 0b10000000) >> 7; // Select the leftmost bit
             ascii = ascii << 1; // Shift the data left by 1
 
-            ret[i*8+j] = tmp; // Store the leftmost bit in an array
+            ret[dataLength] = tmp; // Store the leftmost bit in an array
 
             dataLength++; // Add one to the total data length
 
@@ -73,6 +79,12 @@ uint8_t* fillDataArray(char data[100])
         ret[dataLength] = tmp; // Store the 2 leftmost bits in an array
         dataLength++; // Add one to the total data length
     }
+
+	for (i = 0; i < 8; i++)
+	{
+		ret[dataLength] = 0;
+		dataLength++;
+	}
 
     #ifdef DEBUG // Debugging
     printf("\ndataLength: %i\n", dataLength);
@@ -138,7 +150,8 @@ char* convertToData(uint8_t bits[800], int length)
 
     int checksum = CRC(ascii, strlen(ret), POLY, true); // Do the checksum
 
-    ret[total - 1] = 0b00000000; // Set the last byte to 0 (this is the checksum)
+    ret[total - 1] = 0b00000000; // Set the last 2 bytes to 0 (this is the checksum and end byte)
+	ret[total - 2] = 0b00000000;
 
     #ifdef DEBUG // Debugging
     printf("\n\nChecksum: %i\n\n", checksum);
